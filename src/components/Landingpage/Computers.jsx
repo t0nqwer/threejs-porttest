@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { useMemo, useContext, createContext, useRef } from "react";
+import { useMemo, useContext, createContext, useRef, useState } from "react";
 import { useFrame } from "@react-three/fiber";
 import {
   useGLTF,
@@ -7,13 +7,17 @@ import {
   RenderTexture,
   PerspectiveCamera,
   Text,
+  Html,
 } from "@react-three/drei";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import SpinningBox from "./SpinningBox";
 
 export default function Model(props) {
   const { nodes, materials } = useGLTF("/computers_1-transformed.glb");
   return (
     <group {...props} dispose={null} position={[0, -2, 0]}>
-      <ScreenText
+      <Screen2Text
         // invert
         frame="Object_212"
         panel="Object_213"
@@ -23,7 +27,7 @@ export default function Model(props) {
         position={[-2.73, 0.63, -0.52]}
         rotation={[0, 1.09, 0]}
       />
-      <ScreenText
+      <Screen4Text
         invert
         frame="Object_209"
         panel="Object_210"
@@ -63,7 +67,6 @@ export default function Model(props) {
         />
       </group> */}
       <ScreenText
-        // invert
         frame="Object_221"
         panel="Object_222"
         x={-3}
@@ -72,7 +75,7 @@ export default function Model(props) {
         position={[-3.417, 3.056, 1.303]}
         rotation={[0, 1.222, 0]}
       />
-      <Screen2Text
+      <Screen5Text
         position={[0.27, 1.529, -2.613]}
         frame="Object_206"
         panel="Object_207"
@@ -112,7 +115,7 @@ export default function Model(props) {
           material={materials.Screen}
         />
       </group> */}
-      <ScreenText
+      <Screen8Text
         invert
         frame="Object_218"
         panel="Object_219"
@@ -156,7 +159,24 @@ export default function Model(props) {
           material={materials.Screen}
         />
       </group>
-      <group position={[-3.899, 4.287, -2.642]} rotation={[0, 0.539, 0]}>
+      <Screen3Text
+        frame="Object_224"
+        panel="Object_225"
+        position={[-3.899, 4.287, -2.642]}
+        rotation={[0, 0.539, 0]}
+        x={-4.9}
+        y={1}
+        scale={0.81}
+        text="React.Js Next.Js Node.Js Express.Js MongoDB MySQL TypeScript"
+        fontSize={0.5}
+      />
+      <Screen6Text
+        frame="Object_227"
+        panel="Object_228"
+        position={[0.955, 4.282, -4.203]}
+        rotation={[0.003, -0.647, 0.003]}
+      />
+      {/* <group position={[-3.899, 4.287, -2.642]} rotation={[0, 0.539, 0]}>
         <mesh
           castShadow
           receiveShadow
@@ -169,8 +189,8 @@ export default function Model(props) {
           geometry={nodes.Object_225.geometry}
           material={materials.Screen}
         />
-      </group>
-      <group
+      </group> */}
+      {/* <group
         position={[0.955, 4.282, -4.203]}
         rotation={[0.003, -0.647, 0.003]}
       >
@@ -186,8 +206,20 @@ export default function Model(props) {
           geometry={nodes.Object_228.geometry}
           material={materials.Screen}
         />
-      </group>
-      <group position={[4.683, 4.29, -1.558]} rotation={[0, -Math.PI / 3, 0]}>
+      </group> */}
+      <Screen9Text
+        invert
+        frame="Object_230"
+        panel="Object_231"
+        x={-4.9}
+        y={1}
+        text="React.Js Next.Js Node.Js Express.Js MongoDB MySQL TypeScript"
+        position={[4.683, 4.29, -1.558]}
+        rotation={[0, -Math.PI / 3, 0]}
+        scale={0.81}
+        fontSize={0.5}
+      />
+      {/* <group position={[4.683, 4.29, -1.558]} rotation={[0, -Math.PI / 3, 0]}>
         <mesh
           castShadow
           receiveShadow
@@ -200,7 +232,7 @@ export default function Model(props) {
           geometry={nodes.Object_231.geometry}
           material={materials.Screen}
         />
-      </group>
+      </group> */}
       <group>
         <mesh
           castShadow
@@ -1203,12 +1235,21 @@ function Screen({ frame, panel, children, ...props }) {
 }
 function ScreenText({ fontSize, text, invert, x = 0, y = 1.2, ...props }) {
   const textRef = useRef();
-  const rand = Math.random() * 10000;
-  useFrame(
-    (state) =>
-      (textRef.current.position.x =
-        x + Math.sin(rand + state.clock.elapsedTime / 4) * 8)
-  );
+  useGSAP(() => {
+    gsap.fromTo(
+      textRef.current.position,
+      {
+        x: 13,
+      },
+      {
+        x: -2.7,
+        delay: 1,
+        duration: 8,
+        repeat: -1,
+        ease: "none",
+      }
+    );
+  }, []);
   return (
     <Screen {...props}>
       <PerspectiveCamera
@@ -1222,25 +1263,152 @@ function ScreenText({ fontSize, text, invert, x = 0, y = 1.2, ...props }) {
       <directionalLight position={[10, 10, 5]} />
       <Text
         font="/Inter-Medium.woff"
-        position={[x, y, 0]}
+        position={[0, 5, 0]}
         ref={textRef}
         fontSize={fontSize ? fontSize : 2}
         letterSpacing={0.1}
         color={!invert ? "black" : "#35c19f"}
       >
-        {text}
+        Jirapat Teja &nbsp; Jirapat Teja
       </Text>
     </Screen>
   );
 }
-function Screen2Text({ text, invert, x, y, ...props }) {
+
+function Screen2Text({ fontSize, text, invert, x = 0, y = 1.2, ...props }) {
   const textRef = useRef();
-  const rand = Math.random() * 10000;
-  useFrame(
-    (state) =>
-      (textRef.current.position.x =
-        x + Math.sin(rand + state.clock.elapsedTime / 4) * 8)
+  useGSAP(() => {
+    gsap.fromTo(
+      textRef.current.position,
+      {
+        x: 12,
+      },
+      {
+        x: -7.35,
+        delay: 1,
+        duration: 8,
+        repeat: -1,
+        ease: "none",
+      }
+    );
+  }, []);
+  return (
+    <Screen {...props}>
+      <PerspectiveCamera
+        makeDefault
+        manual
+        aspect={1 / 1}
+        position={[0, 0, 15]}
+      />
+      <color attach="background" args={[invert ? "black" : "#35c19f"]} />
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[10, 10, 5]} />
+      <Text
+        font="/Inter-Medium.woff"
+        position={[x, 5.2, 0]}
+        ref={textRef}
+        fontSize={fontSize ? fontSize : 2}
+        letterSpacing={0.1}
+        color={!invert ? "black" : "#35c19f"}
+      >
+        Web Developer &nbsp; Web Developer
+      </Text>
+    </Screen>
   );
+}
+function Screen3Text({ fontSize, text, invert, x = 0, y = 1.2, ...props }) {
+  const textRef = useRef();
+
+  return (
+    <Screen {...props}>
+      <PerspectiveCamera
+        makeDefault
+        manual
+        aspect={1 / 1}
+        position={[0, -0.2, 10]}
+      />
+      <color attach="background" args={["black"]} />
+      <ambientLight intensity={Math.PI / 2} />
+      <pointLight decay={0} position={[10, 10, 10]} intensity={Math.PI} />
+      <pointLight decay={0} position={[-10, -10, -10]} />
+      <SpinningBox position={[0, 0.5, 0]} scale={0.5} />
+    </Screen>
+  );
+}
+function Screen4Text({ fontSize, text, invert, x = 0, y = 1.2, ...props }) {
+  const textRef = useRef();
+  useGSAP(() => {
+    gsap.fromTo(
+      textRef.current.position,
+      {
+        x: 10,
+      },
+      {
+        x: -2.15,
+        delay: 1,
+        duration: 6,
+        repeat: -1,
+        ease: "none",
+      }
+    );
+  }, []);
+  return (
+    <Screen {...props}>
+      <PerspectiveCamera
+        makeDefault
+        manual
+        aspect={1 / 1}
+        position={[0, 0, 15]}
+      />
+      <color attach="background" args={[invert ? "black" : "#35c19f"]} />
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[10, 10, 5]} />
+      <Text
+        font="/Inter-Medium.woff"
+        position={[x, 5.2, 0]}
+        ref={textRef}
+        fontSize={fontSize ? fontSize : 2}
+        letterSpacing={0.1}
+        color={!invert ? "black" : "#35c19f"}
+      >
+        Portfolio &nbsp; Portfolio
+      </Text>
+    </Screen>
+  );
+}
+function Screen5Text({ text, invert, x, y, ...props }) {
+  const textRef = useRef();
+  const textRef2 = useRef();
+
+  useGSAP(() => {
+    gsap.fromTo(
+      textRef.current.position,
+      {
+        x: 0.5,
+      },
+      {
+        x: -6.43,
+        delay: 1,
+        duration: 5,
+        repeat: -1,
+        ease: "none",
+      }
+    );
+    gsap.fromTo(
+      textRef2.current.position,
+      {
+        x: -6.43,
+      },
+      {
+        x: -1.09,
+        delay: 1,
+        duration: 5.5,
+        repeat: -1,
+        ease: "none",
+      }
+    );
+  }, []);
+
   return (
     <Screen {...props}>
       <PerspectiveCamera
@@ -1254,25 +1422,255 @@ function Screen2Text({ text, invert, x, y, ...props }) {
       <directionalLight position={[10, 10, 5]} />
       <Text
         font="/Inter-Medium.woff"
-        position={[x, y, 0]}
+        position={[5, 1.6, 0]}
         ref={textRef}
-        fontSize={2}
+        fontSize={1}
         letterSpacing={0.1}
         color={"black"}
       >
         {text}
+        &nbsp;
+        {text}
       </Text>
-      {/* <Text
+      <Text
         font="/Inter-Medium.woff"
-        position={[x, y, 0]}
-        ref={textRef}
+        position={[-3, 0.5, 0]}
+        ref={textRef2}
         fontSize={1}
         letterSpacing={0.1}
         color={!invert ? "black" : "#35c19f"}
       >
-        {text}
-      </Text> */}
+        {"Portfolio"}
+        &nbsp;
+        {"Portfolio"}
+      </Text>
     </Screen>
+  );
+}
+function Screen6Text({ fontSize, text, invert, x = 0, y = 1.2, ...props }) {
+  const textRef = useRef();
+  const textRef2 = useRef();
+
+  useGSAP(() => {
+    gsap.fromTo(
+      textRef.current.position,
+      { x: 8.5 },
+      {
+        x: -1.88,
+        delay: 1,
+        duration: 8,
+        repeat: -1,
+        ease: "none",
+      }
+    );
+    gsap.fromTo(
+      textRef2.current.position,
+      { x: 15 },
+      {
+        x: -4.39,
+        delay: 1,
+        duration: 8,
+        repeat: -1,
+        ease: "none",
+      }
+    );
+  }, []);
+  return (
+    <Screen {...props}>
+      <PerspectiveCamera
+        makeDefault
+        manual
+        aspect={1 / 1}
+        position={[0, 0, 15]}
+      />
+      <color attach="background" args={[invert ? "black" : "#35c19f"]} />
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[10, 10, 5]} />
+
+      <Text
+        font="/Inter-Medium.woff"
+        position={[0, 1, 0]}
+        ref={textRef}
+        fontSize={0.8}
+        letterSpacing={0.1}
+        color={!invert ? "black" : "#35c19f"}
+      >
+        Front-End Developer &nbsp; Front-End Developer
+      </Text>
+      <Text
+        font="/Inter-Medium.woff"
+        position={[0, -0.1, 0]}
+        ref={textRef2}
+        fontSize={1.5}
+        letterSpacing={0.1}
+        color={!invert ? "black" : "#35c19f"}
+      >
+        Front-End Developer &nbsp; Front-End Developer
+      </Text>
+    </Screen>
+  );
+}
+function Screen7Text({ fontSize, text, invert, x = 0, y = 1.2, ...props }) {
+  const textRef = useRef();
+  useGSAP(() => {
+    gsap.fromTo(
+      textRef.current.position,
+      {
+        x: 10,
+      },
+      {
+        x: -2.15,
+        delay: 1,
+        duration: 8,
+        repeat: -1,
+        ease: "none",
+      }
+    );
+  }, []);
+  return (
+    <Screen {...props}>
+      <PerspectiveCamera
+        makeDefault
+        manual
+        aspect={1 / 1}
+        position={[0, 0, 15]}
+      />
+      <color attach="background" args={[invert ? "black" : "#35c19f"]} />
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[10, 10, 5]} />
+      <Text
+        font="/Inter-Medium.woff"
+        position={[x, 5.2, 0]}
+        ref={textRef}
+        fontSize={fontSize ? fontSize : 2}
+        letterSpacing={0.1}
+        color={!invert ? "black" : "#35c19f"}
+      >
+        Portfolio &nbsp; Portfolio
+      </Text>
+    </Screen>
+  );
+}
+function Screen8Text({ fontSize, text, invert, x = 0, y = 1.2, ...props }) {
+  const textRef = useRef();
+  const textRef2 = useRef();
+
+  useGSAP(() => {
+    gsap.fromTo(
+      textRef.current.position,
+      {
+        x: -14.7,
+      },
+      {
+        x: 7.5,
+        delay: 1,
+        duration: 15,
+        repeat: -1,
+        ease: "none",
+      }
+    );
+    gsap.fromTo(
+      textRef2.current.position,
+      {
+        x: 2,
+      },
+      {
+        x: -8.91,
+        delay: 1,
+        duration: 8,
+        repeat: -1,
+        ease: "none",
+      }
+    );
+  }, []);
+  return (
+    <Screen {...props}>
+      <PerspectiveCamera
+        makeDefault
+        manual
+        aspect={1 / 1}
+        position={[0, 0, 15]}
+      />
+      <color attach="background" args={["black"]} />
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[10, 10, 5]} />
+      <Text
+        font="/Inter-Medium.woff"
+        position={[3.11, 1.8, 0]}
+        ref={textRef}
+        fontSize={fontSize ? fontSize : 2}
+        letterSpacing={0.1}
+        color={"#35c19f"}
+      >
+        React.Js Next.Js TypeScript JavaScript HTML CSS tailwindcss three.Js
+        gsap React.Js Next.Js
+      </Text>
+      <Text
+        font="/Inter-Medium.woff"
+        position={[0, 0.8, 0]}
+        ref={textRef2}
+        fontSize={0.5}
+        letterSpacing={0.1}
+        color={"#35c19f"}
+      >
+        Node.Js Express.Js MongoDB MySQL Node.Js Express.Js
+      </Text>
+    </Screen>
+  );
+}
+function Screen9Text({ frame, panel, children, ...props }) {
+  const { nodes, materials } = useGLTF("/computers_1-transformed.glb");
+  const textRef = useRef();
+
+  useGSAP(() => {
+    gsap.fromTo(
+      textRef.current.position,
+      {
+        x: 13,
+      },
+      {
+        x: -2.7,
+        delay: 1,
+        duration: 8,
+        repeat: -1,
+        ease: "none",
+      }
+    );
+  }, []);
+  return (
+    <group {...props}>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes[frame].geometry}
+        material={materials.Texture}
+      />
+      <mesh geometry={nodes[panel].geometry} scale={1}>
+        <meshBasicMaterial toneMapped={false}>
+          <RenderTexture width={512} height={512} attach="map" anisotropy={16}>
+            <PerspectiveCamera
+              makeDefault
+              manual
+              aspect={1 / 1}
+              position={[0, 0, 15]}
+            />
+            <color attach="background" args={["black"]} />
+            <ambientLight intensity={0.5} />
+            <directionalLight position={[10, 10, 5]} />
+            <Text
+              font="/Inter-Medium.woff"
+              ref={textRef}
+              position={[0, 1, 0]}
+              fontSize={2}
+              letterSpacing={0.1}
+              color={"#35c19f"}
+            >
+              Jirapat Teja &nbsp; Jirapat Teja
+            </Text>
+          </RenderTexture>
+        </meshBasicMaterial>
+      </mesh>
+    </group>
   );
 }
 

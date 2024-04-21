@@ -7,6 +7,7 @@ body {
   height: 100vh;
   margin: 0;
   padding: 0;
+  background-color: black;
 }
 
 #root {
@@ -14,6 +15,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+canvas {
+  touch-action: none;
 }
 
 @layer components {
