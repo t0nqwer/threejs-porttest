@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import Computers from "../components/Landingpage/Computers";
 import {
   Environment,
@@ -18,6 +18,49 @@ import {
 import Loading from "../components/Loading";
 
 const Landingpage = () => {
+  const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [isLargeDesktop, setIsLargeDesktop] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setIsMobile(true);
+        setIsTablet(false);
+        setIsDesktop(false);
+        setIsLargeDesktop(false);
+      } else if (window.innerWidth >= 768 && window.innerWidth < 1024) {
+        if (window.innerHeight < 500) {
+          setIsMobile(false);
+          setIsTablet(false);
+          setIsDesktop(false);
+          setIsLargeDesktop(true);
+        } else {
+          setIsMobile(false);
+          setIsTablet(true);
+          setIsDesktop(false);
+          setIsLargeDesktop(false);
+        }
+      } else if (window.innerWidth >= 1024 && window.innerWidth < 1440) {
+        setIsMobile(false);
+        setIsTablet(false);
+        setIsDesktop(true);
+        setIsLargeDesktop(false);
+      } else {
+        setIsMobile(false);
+        setIsTablet(false);
+        setIsDesktop(false);
+        setIsLargeDesktop(true);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  console.log(isMobile, isTablet, isDesktop, isLargeDesktop);
   return (
     <>
       <Canvas
@@ -26,7 +69,11 @@ const Landingpage = () => {
           fov: 45,
           near: 1,
           far: 20,
-          position: [0, 0, 8],
+          position: [
+            0,
+            0,
+            isLargeDesktop ? 8 : isDesktop ? 10 : isTablet ? 12 : 14,
+          ],
         }}
       >
         {/* <Environment preset="warehouse" /> */}
@@ -41,7 +88,7 @@ const Landingpage = () => {
           shadow-mapSize={1024}
         />
         {/* <OrbitControls /> */}
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={null}>
           <color args={["#000"]} attach="background" />
           <Sparkles
             count={300}
@@ -91,7 +138,11 @@ const Landingpage = () => {
                 intensity={3}
               />
               <DepthOfField
-                target={[0, 0, 18]}
+                target={[
+                  0,
+                  0,
+                  isLargeDesktop ? 18 : isDesktop ? 25 : isTablet ? 28 : 31,
+                ]}
                 focalLength={0.5}
                 bokehScale={10}
                 height={700}

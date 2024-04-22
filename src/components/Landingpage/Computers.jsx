@@ -37,35 +37,6 @@ export default function Model(props) {
         position={[-1.43, 2.496, -1.8]}
         rotation={[0, 1.002, 0]}
       />
-      {/* <group position={[-2.731, 0.629, -0.522]} rotation={[0, 1.087, 0]}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_212.geometry}
-          material={materials.Texture}
-        />
-        
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_213.geometry}
-          material={materials.Screen}
-        />
-      </group> */}
-      {/* <group position={[-1.43, 2.496, -1.8]} rotation={[0, 1.002, 0]}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_209.geometry}
-          material={materials.Texture}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_210.geometry}
-          material={materials.Screen}
-        />
-      </group> */}
       <ScreenText
         frame="Object_221"
         panel="Object_222"
@@ -83,38 +54,6 @@ export default function Model(props) {
         y={1.2}
         text="Jirapat teja"
       />
-      {/* <group
-        position={[-3.417, 3.056, 1.303]}
-        rotation={[0, 1.222, 0]}
-        scale={0.9}
-      >
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_221.geometry}
-          material={materials.Texture}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_222.geometry}
-          material={materials.Screen}
-        />
-      </group> */}
-      {/* <group position={[0.27, 1.529, -2.613]}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_206.geometry}
-          material={materials.Texture}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_207.geometry}
-          material={materials.Screen}
-        />
-      </group> */}
       <Screen8Text
         invert
         frame="Object_218"
@@ -127,38 +66,18 @@ export default function Model(props) {
         scale={0.81}
         fontSize={0.5}
       />
-      {/* <group
-        position={[3.11, 2.145, -0.18]}
-        rotation={[0, -0.793, 0]}
+      <Screen7Text
+        invert
+        frame="Object_215"
+        panel="Object_216"
+        x={-4.9}
+        y={1}
+        text="React.Js Next.Js Node.Js Express.Js MongoDB MySQL TypeScript"
+        position={[1.845, 0.377, -1.771]}
+        rotation={[0, -Math.PI / 9, 0]}
         scale={0.81}
-      >
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_218.geometry}
-          material={materials.Texture}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_219.geometry}
-          material={materials.Screen}
-        />
-      </group> */}
-      <group position={[1.845, 0.377, -1.771]} rotation={[0, -Math.PI / 9, 0]}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_215.geometry}
-          material={materials.Texture}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_216.geometry}
-          material={materials.Screen}
-        />
-      </group>
+        fontSize={0.5}
+      />
       <Screen3Text
         frame="Object_224"
         panel="Object_225"
@@ -176,37 +95,6 @@ export default function Model(props) {
         position={[0.955, 4.282, -4.203]}
         rotation={[0.003, -0.647, 0.003]}
       />
-      {/* <group position={[-3.899, 4.287, -2.642]} rotation={[0, 0.539, 0]}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_224.geometry}
-          material={materials.Texture}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_225.geometry}
-          material={materials.Screen}
-        />
-      </group> */}
-      {/* <group
-        position={[0.955, 4.282, -4.203]}
-        rotation={[0.003, -0.647, 0.003]}
-      >
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_227.geometry}
-          material={materials.Texture}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_228.geometry}
-          material={materials.Screen}
-        />
-      </group> */}
       <Screen9Text
         invert
         frame="Object_230"
@@ -219,20 +107,7 @@ export default function Model(props) {
         scale={0.81}
         fontSize={0.5}
       />
-      {/* <group position={[4.683, 4.29, -1.558]} rotation={[0, -Math.PI / 3, 0]}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_230.geometry}
-          material={materials.Texture}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.Object_231.geometry}
-          material={materials.Screen}
-        />
-      </group> */}
+
       <group>
         <mesh
           castShadow
@@ -1512,59 +1387,18 @@ function Screen6Text({ fontSize, text, invert, x = 0, y = 1.2, ...props }) {
 }
 function Screen7Text({ fontSize, text, invert, x = 0, y = 1.2, ...props }) {
   const textRef = useRef();
-  useGSAP(() => {
-    gsap.fromTo(
-      textRef.current.position,
-      {
-        x: 10,
-      },
-      {
-        x: -2.15,
-        delay: 1,
-        duration: 8,
-        repeat: -1,
-        ease: "none",
-      }
-    );
-  }, []);
-  return (
-    <Screen {...props}>
-      <PerspectiveCamera
-        makeDefault
-        manual
-        aspect={1 / 1}
-        position={[0, 0, 15]}
-      />
-      <color attach="background" args={[invert ? "black" : "#35c19f"]} />
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[10, 10, 5]} />
-      <Text
-        font="/Inter-Medium.woff"
-        position={[x, 5.2, 0]}
-        ref={textRef}
-        fontSize={fontSize ? fontSize : 2}
-        letterSpacing={0.1}
-        color={!invert ? "black" : "#35c19f"}
-      >
-        Portfolio &nbsp; Portfolio
-      </Text>
-    </Screen>
-  );
-}
-function Screen8Text({ fontSize, text, invert, x = 0, y = 1.2, ...props }) {
-  const textRef = useRef();
   const textRef2 = useRef();
 
   useGSAP(() => {
     gsap.fromTo(
       textRef.current.position,
       {
-        x: -14.7,
+        x: -12,
       },
       {
-        x: 7.5,
+        x: 10.2,
         delay: 1,
-        duration: 15,
+        duration: 18,
         repeat: -1,
         ease: "none",
       }
@@ -1572,10 +1406,10 @@ function Screen8Text({ fontSize, text, invert, x = 0, y = 1.2, ...props }) {
     gsap.fromTo(
       textRef2.current.position,
       {
-        x: 2,
+        x: 6.6,
       },
       {
-        x: -8.91,
+        x: -4.3,
         delay: 1,
         duration: 8,
         repeat: -1,
@@ -1614,6 +1448,49 @@ function Screen8Text({ fontSize, text, invert, x = 0, y = 1.2, ...props }) {
         color={"#35c19f"}
       >
         Node.Js Express.Js MongoDB MySQL Node.Js Express.Js
+      </Text>
+    </Screen>
+  );
+}
+function Screen8Text({ fontSize, text, invert, x = 0, y = 1.2, ...props }) {
+  const textRef = useRef();
+
+  useGSAP(() => {
+    gsap.fromTo(
+      textRef.current.position,
+      {
+        x: 19.5,
+      },
+      {
+        x: -26.1,
+        delay: 1,
+        duration: 18,
+        repeat: -1,
+        ease: "none",
+      }
+    );
+  }, []);
+  return (
+    <Screen {...props}>
+      <PerspectiveCamera
+        makeDefault
+        manual
+        aspect={1 / 1}
+        position={[0, 0, 15]}
+      />
+      <color attach="background" args={["#35c19f"]} />
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[10, 10, 5]} />
+      <Text
+        font="/Inter-Medium.woff"
+        position={[3.11, 1.2, 0]}
+        ref={textRef}
+        fontSize={1}
+        letterSpacing={0.1}
+        color={"black"}
+      >
+        I develop web applications, intuitive user interfaces, and robust
+        backend APIs.&nbsp;I develop
       </Text>
     </Screen>
   );

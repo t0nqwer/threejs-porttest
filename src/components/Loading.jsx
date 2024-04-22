@@ -1,12 +1,11 @@
 import { Html, useProgress } from "@react-three/drei";
+import { Progress } from "./ui/progress";
 
-const Loading = () => {
+const Loading = ({ progress }) => {
   return (
-    <Html center>
-      <div className=" absolute z-[1000]  w-screen h-screen   bg-white text-white">
-        Loading ...
-      </div>
-    </Html>
+    <div className=" absolute z-[1000] flex justify-center items-center  w-screen h-screen   bg-black text-white">
+      <Progress value={progress} className={"h-1  w-44"} />
+    </div>
   );
 };
 
