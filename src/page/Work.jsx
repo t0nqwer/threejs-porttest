@@ -94,9 +94,12 @@ const Work = () => {
                       className="flex items-center translate-x-0 md:-translate-x-9 "
                     >
                       <FaArrowRight className="mr-3 text-2xl text-white max-md:hidden" />
-                      <div className="flex justify-between w-full ">
+                      <div className="flex items-end justify-between w-full ">
                         <div className="font-medium xl:text-2xl lg:text-xl text-neutral-100">
-                          {work.title}
+                          <h1> {work.title}</h1>
+                          {work.frameWork.map((frame, index) => (
+                            <span className="px-1 text-xs ">{frame} </span>
+                          ))}
                         </div>
                         <div className="text-right max-w-1/2 text-neutral-400">
                           {work.category}
