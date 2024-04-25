@@ -37,21 +37,20 @@ function App() {
       <div className="relative w-full h-full">
         {progress === 100 && <Overlay />}
         {isMenuOpen && <MenuNav />}
-
+        {currentPath !== "" && (
+          <Background
+            color1="bg-default"
+            color2="bg-default"
+            color3="bg-orange-500"
+            type={1}
+          />
+        )}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/work" element={<Work />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
-        {currentPath === "" && (
-          <Background
-            color1="#35c19f"
-            color2="#35c19f"
-            color3="orange"
-            type={1}
-          />
-        )}
       </div>
     </BrowserRouter>
   );

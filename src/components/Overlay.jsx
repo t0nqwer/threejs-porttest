@@ -135,7 +135,7 @@ const Overlay = () => {
         </h1>
         <div
           id="logotop"
-          className="absolute z-40 items-center gap-2 p-2 text-2xl font-light translate-y-5 opacity-0 top-14 left-14 w-fit topdiv"
+          className="absolute z-40 items-center gap-2 text-2xl font-light translate-y-5 opacity-0 top-14 left-14 max-lg:top-10 max-lg:left-10 max-sm:top-5 max-sm:left-5 w-fit topdiv"
         >
           <img
             src="/JTLOGO-01.svg"
