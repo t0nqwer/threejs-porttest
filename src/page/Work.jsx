@@ -54,6 +54,7 @@ const Work = () => {
   }, [image]);
 
   const mouseOutHandle = (work) => {
+    if (window.innerWidth < 768) return;
     let id = work.title.split(" ").join("");
     gsap.to(`#${id}`, {
       translateX: -36,
