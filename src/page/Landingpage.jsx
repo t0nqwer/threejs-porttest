@@ -1,12 +1,10 @@
-import { Canvas } from "@react-three/fiber";
-import React, { Suspense, useEffect, useState } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import React, { Suspense, useEffect, useState, useRef } from "react";
 import Computers from "../components/Landingpage/Computers";
 import {
-  Environment,
   Float,
   Html,
   MeshReflectorMaterial,
-  OrbitControls,
   PresentationControls,
   Sparkles,
 } from "@react-three/drei";
@@ -15,56 +13,61 @@ import {
   DepthOfField,
   EffectComposer,
 } from "@react-three/postprocessing";
-import Loading from "../components/Loading";
+import { useNavigate } from "react-router-dom";
 
 const Landingpage = () => {
-  const [isMobile, setIsMobile] = useState(false);
-  const [isTablet, setIsTablet] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(false);
-  const [isLargeDesktop, setIsLargeDesktop] = useState(false);
-
+  const navigate = useNavigate();
+  const [size, setSize] = useState("");
+  const [loadedSize, setLoadedSize] = useState("");
   useEffect(() => {
+    if (window.innerWidth < 768) {
+      setLoadedSize("isMobile");
+    } else if (window.innerWidth >= 768 && window.innerWidth < 1024) {
+      if (window.innerHeight < 500) {
+        setLoadedSize("isLargeDesktop");
+      } else {
+        setLoadedSize("isTablet");
+      }
+    } else if (window.innerWidth >= 1024 && window.innerWidth < 1440) {
+      setLoadedSize("isDesktop");
+    } else {
+      setLoadedSize("isLargeDesktop");
+    }
     const handleResize = () => {
       if (window.innerWidth < 768) {
-        setIsMobile(true);
-        setIsTablet(false);
-        setIsDesktop(false);
-        setIsLargeDesktop(false);
+        setSize("isMobile");
       } else if (window.innerWidth >= 768 && window.innerWidth < 1024) {
         if (window.innerHeight < 500) {
-          setIsMobile(false);
-          setIsTablet(false);
-          setIsDesktop(false);
-          setIsLargeDesktop(true);
+          setSize("isLargeDesktop");
         } else {
-          setIsMobile(false);
-          setIsTablet(true);
-          setIsDesktop(false);
-          setIsLargeDesktop(false);
+          setSize("isTablet");
         }
       } else if (window.innerWidth >= 1024 && window.innerWidth < 1440) {
-        setIsMobile(false);
-        setIsTablet(false);
-        setIsDesktop(true);
-        setIsLargeDesktop(false);
+        setSize("isDesktop");
       } else {
-        setIsMobile(false);
-        setIsTablet(false);
-        setIsDesktop(false);
-        setIsLargeDesktop(true);
+        setSize("isLargeDesktop");
       }
     };
+
     window.addEventListener("resize", handleResize);
     handleResize();
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  console.log(isMobile, isTablet, isDesktop, isLargeDesktop);
+
+  useEffect(() => {
+    if (size !== loadedSize) {
+      const html = document.getElementById("html");
+      html.classList.remove("hidden");
+      html.classList.add("flex");
+    }
+  }, [size]);
+
   return (
     <>
       <Canvas
-        className="w-full h-full "
+        gl={{ preserveDrawingBuffer: true }}
         camera={{
           fov: 45,
           near: 1,
@@ -72,11 +75,16 @@ const Landingpage = () => {
           position: [
             0,
             0,
-            isLargeDesktop ? 8 : isDesktop ? 10 : isTablet ? 12 : 14,
+            size === "isLargeDesktop"
+              ? 8
+              : size === "isDesktop"
+              ? 8
+              : size === "isTablet"
+              ? 12
+              : 14,
           ],
         }}
       >
-        {/* <Environment preset="warehouse" /> */}
         <hemisphereLight intensity={0.15} groundColor="black" />
         <spotLight
           decay={0}
@@ -87,7 +95,29 @@ const Landingpage = () => {
           castShadow
           shadow-mapSize={1024}
         />
-        {/* <OrbitControls /> */}
+        <Html
+          center
+
+          // className="items-center justify-center hidden w-screen h-screen bg-black bg-opacity-50 backdrop-blur-md"
+        >
+          <div
+            id={"html"}
+            className="items-center justify-center hidden w-screen h-screen bg-black bg-opacity-50 backdrop-blur-md"
+          >
+            <div className="flex flex-col items-center justify-center ">
+              <p className="text-white ">
+                Your screen Size change Please Reload the page
+              </p>
+              <button
+                className="p-2 mt-5 bg-white bg-opacity-50 rounded-md hover:bg-opacity-85 "
+                onClick={() => window.location.reload()}
+              >
+                Reload
+              </button>
+            </div>
+          </div>
+        </Html>
+
         <Suspense fallback={null}>
           <color args={["#000"]} attach="background" />
           <Sparkles
@@ -141,7 +171,13 @@ const Landingpage = () => {
                 target={[
                   0,
                   0,
-                  isLargeDesktop ? 18 : isDesktop ? 25 : isTablet ? 28 : 31,
+                  size === "isLargeDesktop"
+                    ? 18
+                    : size === "isDesktop"
+                    ? 20
+                    : size === "isTablet"
+                    ? 28
+                    : 31,
                 ]}
                 focalLength={0.5}
                 bokehScale={10}
