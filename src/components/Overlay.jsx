@@ -1,6 +1,6 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAppState } from "@/zustand/AppState";
@@ -8,12 +8,16 @@ import { useLocation } from "react-router-dom";
 
 const Overlay = () => {
   let location = useLocation();
-  console.log(location.pathname);
 
-  const { isMenuOpen, setIsMenuOpen } = useAppState();
+  const { isMenuOpen, setIsMenuOpen, setCurrentPath } = useAppState();
   const tl = gsap.timeline();
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const path = location.pathname.slice(1);
+    setCurrentPath(path);
+  }, [location.pathname]);
   useGSAP(() => {
     const path = location.pathname.slice(1);
     if (isMenuOpen && path === "") {

@@ -2,8 +2,10 @@ import Background from "@/components/Background";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import React from "react";
+import { useLocation } from "react-router-dom";
 
 const About = () => {
+  const location = useLocation();
   useGSAP(() => {
     gsap.to("#about", {
       y: 0,

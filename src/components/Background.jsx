@@ -3,67 +3,59 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
 const Background = ({ color1, color2, color3, type }) => {
-  useGSAP(() => {
-    gsap.fromTo(
-      "#light1",
-      {
-        opacity: 0.4,
-        duration: 10,
-        yoyo: true,
-        repeat: -1,
-      },
-      {
-        opacity: 0.7,
-        duration: 10,
-        scale: 1.5,
-        yoyo: true,
-        repeat: -1,
-      }
-    );
-    gsap.fromTo(
-      "#light3",
-      {
-        opacity: 0.4,
-        duration: 10,
-        yoyo: true,
-        repeat: -1,
-      },
-      {
-        opacity: 0.7,
-        duration: 10,
-        scale: 1.5,
-        delay: 1,
-        yoyo: true,
-        repeat: -1,
-      }
-    );
-    gsap.fromTo(
-      "#light2",
-      {
-        opacity: 0.8,
-        duration: 10,
-        yoyo: true,
-        repeat: -1,
-      },
-      {
-        opacity: 0.4,
-        duration: 10,
-        scale: 2,
-        delay: 1,
-        yoyo: true,
-        repeat: -1,
-      }
-    );
-    gsap.to("#svgBackground", {
-      rotate: 360,
-      duration: 20,
-      repeat: -1,
-      ease: "none",
-      pointerEvents: "none",
-      transformOrigin: "30% 50%",
-    });
-  }, []);
   if (type === 1) {
+    useGSAP(() => {
+      gsap.fromTo(
+        "#light1",
+        {
+          opacity: 0.4,
+          duration: 10,
+          yoyo: true,
+          repeat: -1,
+        },
+        {
+          opacity: 0.7,
+          duration: 10,
+          scale: 1.5,
+          yoyo: true,
+          repeat: -1,
+        }
+      );
+      gsap.fromTo(
+        "#light3",
+        {
+          opacity: 0.4,
+          duration: 10,
+          yoyo: true,
+          repeat: -1,
+        },
+        {
+          opacity: 0.7,
+          duration: 10,
+          scale: 1.5,
+          delay: 1,
+          yoyo: true,
+          repeat: -1,
+        }
+      );
+      gsap.fromTo(
+        "#light2",
+        {
+          opacity: 0.8,
+          duration: 10,
+          yoyo: true,
+          repeat: -1,
+        },
+        {
+          opacity: 0.4,
+          duration: 10,
+          scale: 2,
+          delay: 1,
+          yoyo: true,
+          repeat: -1,
+        }
+      );
+    }, []);
     return (
       <div className="absolute top-0 left-0 w-full h-screen overflow-hidden ">
         <div className="relative w-full h-full bg-neutral-900">
@@ -84,6 +76,16 @@ const Background = ({ color1, color2, color3, type }) => {
     );
   }
   if (type === 2) {
+    useGSAP(() => {
+      gsap.to("#svgBackground", {
+        rotate: 360,
+        duration: 20,
+        repeat: -1,
+        ease: "none",
+        pointerEvents: "none",
+        transformOrigin: "30% 50%",
+      });
+    }, []);
     return (
       <div className="absolute top-0 left-0 w-full h-screen overflow-hidden ">
         <div className="relative w-full h-full bg-neutral-900">

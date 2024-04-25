@@ -2,7 +2,12 @@ import gsap from "gsap";
 import { create } from "zustand";
 
 export const useAppState = create((set) => ({
+  currentPath: "",
   isMenuOpen: false,
+  setCurrentPath: (currentPath) => {
+    console.log(currentPath);
+    set((state) => ({ ...state, currentPath }));
+  },
   setIsMenuOpen: (isMenuOpen) => {
     if (isMenuOpen) {
       set((state) => ({ ...state, isMenuOpen }));

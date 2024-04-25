@@ -13,10 +13,11 @@ import { Menu } from "lucide-react";
 import MenuNav from "./components/MenuNav";
 import { useAppState } from "./zustand/AppState";
 import Contact from "./page/Contact";
+import Background from "./components/Background";
 
 function App() {
   const { progress } = useProgress();
-  const { isMenuOpen, setIsMenuOpen } = useAppState();
+  const { isMenuOpen, setIsMenuOpen, currentPath } = useAppState();
   // const [x, setX] = useState(0);
   // const [y, setY] = useState(0);
   // const [size, setSize] = useState(32);
@@ -43,6 +44,14 @@ function App() {
           <Route path="/work" element={<Work />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
+        {currentPath === "" && (
+          <Background
+            color1="#35c19f"
+            color2="#35c19f"
+            color3="orange"
+            type={1}
+          />
+        )}
       </div>
     </BrowserRouter>
   );
