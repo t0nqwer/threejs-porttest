@@ -15,6 +15,7 @@ import { useAppState } from "./zustand/AppState";
 import Contact from "./page/Contact";
 import Background from "./components/Background";
 import Noise from "./components/Noise";
+import WorkSingle from "./page/WorkSingle";
 
 function App() {
   const { progress } = useProgress();
@@ -50,7 +51,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/work" element={<Work />} />
+          <Route path="/work" element={<Work />}></Route>
+          <Route path="/work/:id" element={<WorkSingle />} />
+
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </div>

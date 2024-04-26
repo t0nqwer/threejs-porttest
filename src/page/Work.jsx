@@ -4,10 +4,12 @@ import Background from "@/components/Background";
 import { useGSAP } from "@gsap/react";
 import { FaArrowRight } from "react-icons/fa6";
 import gsap from "gsap";
+import { useNavigate } from "react-router-dom";
 
 const Work = () => {
   const [work, setWork] = useState(workList[0]);
   const [image, setImage] = useState();
+  const navigate = useNavigate();
 
   const mouseOverhandle = (work) => {
     console.log(work.image);
@@ -62,6 +64,28 @@ const Work = () => {
     });
     setImage();
   };
+  const ExitPage = (work) => {
+    // gsap.to("#mainwork", {
+    //   y: -100,
+    //   opacity: 0,
+    //   stagger: 0.2,
+    //   duration: 1,
+    // });
+    // gsap.to("#image", {
+    //   opacity: 0,
+    //   duration: 1,
+    // });
+    // gsap
+    //   .to("#workList", {
+    //     y: -100,
+    //     opacity: 0,
+    //     stagger: 0.2,
+    //     duration: 1,
+    //   })
+    //   .then(() => {
+    //     navigate(`/work/${work}`);
+    //   });
+  };
 
   return (
     <div className="z-30 flex items-end w-full h-screen py-10 overflow-hidden select-none bg-opacity-80 backdrop-blur-[100px] bg-neutral-900 ">
@@ -89,6 +113,7 @@ const Work = () => {
                     className="py-2 rounded-lg cursor-pointer md:py-3 "
                     onMouseOver={() => mouseOverhandle(work)}
                     onMouseLeave={() => mouseOutHandle(work)}
+                    onClick={() => ExitPage(work.title)}
                   >
                     <div
                       id={work.title.split(" ").join("")}

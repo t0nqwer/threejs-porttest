@@ -21,7 +21,7 @@ export const workList = [
     client: "Khwanta Handicraft",
     blackground: "bg-yellow-500",
     frameWork: ["React", "MongoDB", "TailwindCSS", "Express.js", "Node.js"],
-    image: "/work/khwantaDashboard.png",
+    image: "/work/khwantadashboard1.png",
   },
   {
     id: 3,
@@ -85,7 +85,7 @@ export const workList = [
   // },
   {
     id: 7,
-    title: "Iphone 15 Pro Max Website",
+    title: "Recreate Iphone 15 Pro Max Website",
     description:
       "redesigning the website for the new Iphone 15 Pro Max, focusing on a modern and sleek design to showcase the phone's features and specifications. The website is designed to be user-friendly and visually appealing, ensuring a seamless user experience for potential customers.",
     category: "Front-end development",

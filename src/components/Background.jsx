@@ -70,6 +70,16 @@ const Background = ({ color1, color2, color3, type }) => {
     if (currentPath === "contact") {
       const tl = gsap.timeline();
       const width = window.innerWidth;
+      tl.to("#bgdiv", { x: -(width * 3), duration: 2, ease: "power2.inOut" });
+    }
+    if (
+      currentPath !== "" &&
+      currentPath !== "about" &&
+      currentPath !== "work" &&
+      currentPath !== "contact"
+    ) {
+      const tl = gsap.timeline();
+      const width = window.innerWidth;
       tl.to("#bgdiv", { x: -(width * 2), duration: 2, ease: "power2.inOut" });
     }
   }, [currentPath]);
@@ -106,6 +116,14 @@ const Background = ({ color1, color2, color3, type }) => {
           <svg id="svgBackground" scale={0.5} className="scale-75 ">
             <path width={20} fill={"#FC4100"} />
           </svg>
+        </div>
+        <div
+          id="bgdiv4"
+          className="relative flex items-center justify-center w-full h-full overflow-hidden shrink-0 "
+        >
+          <h1 className="tracking-[0.2em] text-white xl:text-9xl text-center lg:text-8xl md:text-7xl text-7xl">
+            JIRAPAT <br className="block md:hidden" /> TEJA
+          </h1>
         </div>
       </div>
     </div>
