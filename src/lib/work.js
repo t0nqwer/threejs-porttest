@@ -21,7 +21,7 @@ export const workList = [
     client: "Khwanta Handicraft",
     blackground: "bg-yellow-500",
     frameWork: ["React", "MongoDB", "TailwindCSS", "Express.js", "Node.js"],
-    image: "/public/work/khwantaDashboard.png",
+    image: "/work/khwantaDashboard.png",
   },
   {
     id: 3,
