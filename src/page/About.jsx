@@ -35,7 +35,7 @@ const About = () => {
     );
   }, []);
   return (
-    <div className="z-10 flex flex-row-reverse w-full h-screen bg-opacity-50 select-none max-md:overflow-y-scroll max-md:p-10 max-sm:p-5 max-md:block backdrop-blur-3xl bg-neutral-900">
+    <div className="z-20 flex flex-row-reverse w-full h-screen bg-opacity-50 select-none max-md:overflow-y-scroll max-md:p-10 max-sm:p-5 max-md:block backdrop-blur-3xl bg-neutral-900">
       <div id="rightabout" className="w-1/3 h-3/4 max-md:w-full max-md:mt-24 ">
         <div className="w-full h-full text-white ">
           <img

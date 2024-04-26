@@ -14,6 +14,7 @@ import MenuNav from "./components/MenuNav";
 import { useAppState } from "./zustand/AppState";
 import Contact from "./page/Contact";
 import Background from "./components/Background";
+import Noise from "./components/Noise";
 
 function App() {
   const { progress } = useProgress();
@@ -34,9 +35,10 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="relative w-full h-full">
+      <div className="relative w-full h-full overflow-hidden">
         {progress === 100 && <Overlay />}
         {isMenuOpen && <MenuNav />}
+        <Noise />
         {currentPath !== "" && (
           <Background
             color1="bg-default"

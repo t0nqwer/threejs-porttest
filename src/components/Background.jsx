@@ -104,7 +104,7 @@ const Background = ({ color1, color2, color3, type }) => {
           className="relative w-full h-full overflow-hidden shrink-0 "
         >
           <svg id="svgBackground" scale={0.5} className="scale-75 ">
-            <path width={20} fill={"#4D5D53"} />
+            <path width={20} fill={"#FC4100"} />
           </svg>
         </div>
       </div>

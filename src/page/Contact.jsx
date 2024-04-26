@@ -25,7 +25,7 @@ const Contact = () => {
     );
   }, []);
   return (
-    <div className="z-10 flex items-end w-full h-screen py-10 overflow-hidden select-none bg-opacity-80 backdrop-blur-[100px] bg-neutral-900 ">
+    <div className="z-20 flex items-end w-full h-screen py-10 overflow-hidden  select-none bg-opacity-80 backdrop-blur-[100px] bg-neutral-900 ">
       <div className="w-full h-3/4">
         <div className="flex items-center justify-center w-full h-full px-28 max-lg:px-10">
           <div id="contact" className="w-full h-full xl:w-3/4 lg:w-5/6">

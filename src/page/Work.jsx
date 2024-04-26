@@ -64,7 +64,7 @@ const Work = () => {
   };
 
   return (
-    <div className="z-10 flex items-end w-full h-screen py-10 overflow-hidden select-none bg-opacity-80 backdrop-blur-[100px] bg-neutral-900 ">
+    <div className="z-30 flex items-end w-full h-screen py-10 overflow-hidden select-none bg-opacity-80 backdrop-blur-[100px] bg-neutral-900 ">
       <div className="w-full h-3/4">
         <div className="flex items-center justify-center w-full h-full lg:flex-row px-28 max-lg:px-10">
           <div className="hidden w-1/2 pr-10 md:block ">
